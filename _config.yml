@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Brandonye(盛源)"
+title                    : "Brandonye (盛源)"
 title_separator          : "-"
 name                     : &name "brandonye"
 description              : &description "personal description"
@@ -61,7 +61,7 @@ analytics:
 author:
   name             : "brandonye"
   avatar           : "profile.png"
-  bio              : "Your biography for the left-hand sidebar"
+  bio              : "A undergraduate student in Sun Yat-sen University"
   location         : "Guangzhou, China"
   employer         :
   pubmed           :
