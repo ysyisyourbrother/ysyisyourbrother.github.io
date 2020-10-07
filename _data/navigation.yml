@@ -3,8 +3,8 @@ main:
   - title: "Publications"
     url: /publications/
     
-  - title: "CV"
+  - title: "CV (简历)"
     url: /cv/
    
-  - title: "Blog Posts"
+  - title: "Blog Posts (博客)"
     url: /year-archive/
