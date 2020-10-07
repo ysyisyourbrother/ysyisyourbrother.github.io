@@ -6,5 +6,5 @@ tags:
   - daily
 ---
 
-My first day in githun.io. Thanks for [Jekyll](https://jekyllrb.com/) & [AcademicPages](https://github.com/academicpages/academicpages.github.io).
+My first day in github.io. Thanks for [Jekyll](https://jekyllrb.com/) & [AcademicPages](https://github.com/academicpages/academicpages.github.io).
 
