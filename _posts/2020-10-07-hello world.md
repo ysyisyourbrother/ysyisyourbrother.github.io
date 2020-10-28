@@ -1,7 +1,7 @@
 ---
 title: 'Hello World'
 date: 2020-10-07
-permalink: /posts/2012/08/blog-post-1/
+permalink: /posts/2020/10/blog-post-1/
 tags:
   - daily
 ---
