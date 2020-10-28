@@ -1,10 +1,10 @@
 # main links links
 main:
-  - title: "Publications (发表)"
+  - title: "Publications"
     url: /publications/
     
-  - title: "CV (简历)"
+  - title: "CV"
     url: /cv/
    
-  - title: "Blog Posts (博客)"
+  - title: "Blog Posts"
     url: /year-archive/
