@@ -6,8 +6,6 @@ tags:
   - [ray, RL]
 ---
 
-## Hello Ray!  Part1: Ray Core Walkthrough
-
 ### 1. How to start ray?
 
 First, we need to start ray at one server node. Use this command to start ray: 
@@ -53,7 +51,7 @@ ray start --address='172.16.0.11:6379' --redis-password='5241590000000000'
 
 Open dashboard to see your cluster's status:
 
-![image-20201101135934182](assets/Ray/image-20201101135934182.png)
+![image-20201101135934182](https://ysyisyourbrother.github.io/images/posts_img/HelloRay1/1.png)
 
 
 
