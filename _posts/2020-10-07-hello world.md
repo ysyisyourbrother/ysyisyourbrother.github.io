@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 'Hello World'
 date: 2020-10-07
 permalink: /posts/2020/10/blog-post-1/
