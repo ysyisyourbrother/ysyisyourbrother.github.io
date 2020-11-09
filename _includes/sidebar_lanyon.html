@@ -31,7 +31,7 @@
     <!-- Index page do not have toc -->
     {% if page.layout == "post" %}
     <div id="toc"></div>
-    <script type="text/javascript">
+    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/toc.js">
       $(document).ready(function() {
         $('#toc').toc();
       });
