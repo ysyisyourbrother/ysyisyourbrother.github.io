@@ -7,7 +7,7 @@ tags:
   - [ray, RL]
 ---
 
-### 1. How to start ray?
+## How to start ray?
 
 First, we need to start ray at one server node. Use this command to start ray: 
 
@@ -56,14 +56,14 @@ Open dashboard to see your cluster's status:
 
 
 
-### 2. How to parallelize your python scripts with ray?
+## How to parallelize your python scripts with ray?
 
 The basic knowledge of ray you need to know:
 
 1. Use remote **function (task)** or **class (Actors)**: [`ray.remote`]
 2. Acquire result with object IDs:  [`ray.put`, `ray.get`, `ray.wait`]
 
-#### 2.1 What is remote functions(tasks)?
+### What is remote functions(tasks)?
 
 You can easily change your local function in python scripts by adding a decorator like `@ray.remote`:
 
@@ -99,7 +99,7 @@ for _ in range(4):
 
 
 
-#### 2.2 What is object ID?
+### What is object ID?
 
 In ray, we can create remote objects, and use `object_id` to refer to them. Remote objects are stored in `Object stores` of shared memory, and each node in the cluster will hace an object store. `Object_id` can be create by:
 
@@ -119,7 +119,7 @@ In ray, we can create remote objects, and use `object_id` to refer to them. Remo
 
 
 
-#### 2.3 How to get results?
+### How to get results?
 
 After obtaining the `object_id`, you are promised to use it to get the corresponding result by calling this `ray.get(object_id, timeout=None)`. 
 
@@ -147,7 +147,7 @@ except RayTimeoutError:
 
 
 
-#### 2.4 How to check tasks' status
+### How to check tasks' status
 
 `ray.wait()` will return the list of two sets of ObjectIDs. The first list contains at most `num_returns` objectIDs which have been ready for returning results. And the other list contains the remaining IDs (may be ready or unready).
 
@@ -164,7 +164,7 @@ ready_ids, remaining_ids = ray.wait(object_ids, num_returns=1, timeout=None)
 
 
 
-#### [2.5 What is remote classes?(Actors)](https://docs.ray.io/en/latest/walkthrough.html#remote-classes-actors)
+### [What is remote classes?(Actors)](https://docs.ray.io/en/latest/walkthrough.html#remote-classes-actors)
 
 Actors extend the Ray API from functions(tasks) to classes. An actor is essentially a stateful worker. State means that we can keep variables in an instance. However, in functions, variables will expire after the functions finish.
 
