@@ -19,7 +19,7 @@
     {% assign pages_list = site.pages | sort:"url" %}
     {% for node in pages_list %}
       {% if node.title != null %}
-        {% if node.layout == "page" %}
+        {% if node.layout == "archive" %}
           <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url | absolute_url }}">{{ node.title }}</a>
         {% endif %}
       {% endif %}
@@ -31,8 +31,18 @@
   </nav>
 
   <div class="sidebar-item">
+    <!-- Index page do not have toc -->
+    {% if page.layout == "post" %}
+    <div id="toc"></div>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#toc').toc();
+      });
+    </script>
+    {% endif %}
+
     <p>
-      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+      &copy; {{ site.time | date: '%Y' }} ysyisyourbrother.
     </p>
   </div>
 </div>
