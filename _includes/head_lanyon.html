@@ -11,12 +11,7 @@
       {{ page.title }} &middot; {{ site.title }}
     {% endif %}
   </title>
-  <p>
-    {% if site.data.ui-text[site.locale].meta_label %}
-      <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
-    {% endif %}
-    {% include page__taxonomy.html %}
-  </p>
+
 
   {% if page.url and site.baseurl %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
