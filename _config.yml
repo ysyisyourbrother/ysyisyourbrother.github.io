@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Brandonye (盛源)"
 title_separator          : "-"
 name                     : &name "brandonye"
-description              : &description "personal description"
+description              : &description 万古不磨意，中流自在心
 url                      : https://ysyisyourbrother.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "ysyisyourbrother/ysyisyourbrother.github.io"
