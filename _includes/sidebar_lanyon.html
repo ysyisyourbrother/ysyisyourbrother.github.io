@@ -1,5 +1,21 @@
 <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
      styles, `#sidebar-checkbox` for behavior. -->
+<!-- Load jQuery -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      inlineMath: [['$','$']]
+    }
+  });
+</script>
+
+<!-- toc -->
+<script src="{{ site.baseurl }}/assets/js/toc.js"></script>
+
 <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
 
 <!-- Toggleable sidebar -->
@@ -31,7 +47,7 @@
     <!-- Index page do not have toc -->
     {% if page.layout == "post" %}
     <div id="toc"></div>
-    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/toc.js">
+    <script type="text/javascript">
       $(document).ready(function() {
         $('#toc').toc();
       });
