@@ -7,6 +7,8 @@ tags:
   - [ray, RL]
 ---
 
+Hello Ray!
+
 ## How to start ray?
 
 First, we need to start ray at one server node. Use this command to start ray: 
@@ -216,6 +218,8 @@ print(results)  # prints [2, 3, 4, 5, 6]
 
 1. https://docs.ray.io/en/master/serialization.html
 2. https://zhuanlan.zhihu.com/p/102557115
+
+
 
 
 

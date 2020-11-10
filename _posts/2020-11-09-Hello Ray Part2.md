@@ -7,8 +7,6 @@ tags:
   - [ray, RL]
 ---
 
-# Hello Ray! Part2: Build A Simple RL Demo
-
 In this part, we will use `python` to build a simple reinforcement learning demo to solve the games in `Open AI Gym` such as `CartPole`, `breakout`  and so on.
 
 I absolutely believe that you must have a foundation in reinforcement learning if you want to practice `ray`. So in this series, I will not analyze details in RL or in those codes of demo. In this part, I will show you a simple RL demo to solve games in `Open AI Gym` and in next part, I will manage to parallelize this RL Demo with the help of `ray`.
@@ -282,6 +280,8 @@ if __name__ == "__main__":
 ### References
 
 1. https://gym.openai.com/ 
+
+
 
 
 
