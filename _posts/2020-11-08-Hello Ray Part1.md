@@ -217,3 +217,10 @@ print(results)  # prints [2, 3, 4, 5, 6]
 1. https://docs.ray.io/en/master/serialization.html
 2. https://zhuanlan.zhihu.com/p/102557115
 
+
+
+### Further Reading
+
+1. [Hello Ray!  Part1: Ray Core Walkthrough](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-1/)
+
+2. [Hello Ray!  Part2: Build A Simple RL Demo](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-2/)        
