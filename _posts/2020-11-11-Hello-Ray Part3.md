@@ -1,8 +1,7 @@
 ---
 layout: post
-title: 'Hello Ray!  Part3: Parallelize your RL model with ray'
+title: 'Hello Ray!  Part2: Build A Simple RL Demo'
 date: 2020-11-11
-permalink: /posts/HelloRay3/
 tags:
   - [ray, RL]
 ---
