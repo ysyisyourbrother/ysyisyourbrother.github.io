@@ -14,7 +14,7 @@ In this part, we will use ray to design a simple `distributed reinforcement lear
 
 As shown in last part, traditional reinforcement learning model such as DQN is an iterative process. We can just set that only after agents have interacted with the environment serveral times will a reinforcement learning training be performed. 
 
-![image-20201101135934182](https://ysyisyourbrother.github.io/images/posts_img/HelloRay/2.png)
+<img src="https://ysyisyourbrother.github.io/images/posts_img/HelloRay/2.png" alt="image-20201101135934182" style="zoom: 50%;" />
 
 However, if we want to parallelize this simple model, for example, we can have serveral independent agents who share same DQN parameters interact with environment at the same time or serveral training process which can move on parallel with agents, using the datas produced by interaction. And that is why ray stands out.
 
@@ -22,7 +22,9 @@ Parallel and distributed computing are a staple of modern applications. We need 
 
 With the help of ray, we can ignore communication(grpc) and storage(redis) and easily build a distributed RL model with sight modification. As shown below:
 
-![image-20201101135934182](https://ysyisyourbrother.github.io/images/posts_img/HelloRay/3.jpeg)
+<img src="https://ysyisyourbrother.github.io/images/posts_img/HelloRay/3.jpeg" alt="image-20201101135934182" style="zoom:50%;" />
+
+## Combining RL with the framework
 
 In next serveral sections, I will show complete codes of the demo after combining the simple distributed RL model.
 
