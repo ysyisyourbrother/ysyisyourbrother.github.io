@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 'Hello Ray!  Part3: Build A Simple RL Demo'
+title: 'Hello Ray!  Part2: Build A Simple RL Demo'
 date: 2020-11-09
-permalink: /posts/2020/11/blog-post-3/
+permalink: /posts/HelloRay2/
 tags:
   - [ray, RL]
 ---
