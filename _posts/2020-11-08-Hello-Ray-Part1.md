@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 'Hello Ray!  Part1: Ray Core Walkthrough'
-date: 2020-11-08
 tags:
   - [ray, RL]
 ---

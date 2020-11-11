@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 'Hello Ray!  Part2: Build A Simple RL Demo'
-date: 2020-11-09
 tags:
   - [ray, RL]
 ---
