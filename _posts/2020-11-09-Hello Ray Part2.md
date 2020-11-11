@@ -287,6 +287,8 @@ if __name__ == "__main__":
 
 ### Further Reading
 
-1. [Hello Ray!  Part1: Ray Core Walkthrough](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-1/)
+- [Hello Ray!  **Part1:** Ray Core Walkthrough](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-1/)
 
-2. [Hello Ray!  Part2: Build A Simple RL Demo](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-2/)        
+- [Hello Ray!  **Part2:** Build A Simple RL Demo](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-2/)        
+
+- [Hello Ray!  **Part3:** Parallelize your RL model with ray](https://ysyisyourbrother.github.io/posts/2020/11/blog-post-3/)        
