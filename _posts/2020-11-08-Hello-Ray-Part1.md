@@ -212,7 +212,7 @@ print(results)  # prints [2, 3, 4, 5, 6]
 
 
 
-### References
+## References
 
 1. https://docs.ray.io/en/master/serialization.html
 
@@ -220,7 +220,7 @@ print(results)  # prints [2, 3, 4, 5, 6]
 
 
 
-### Further Reading
+## Further Reading
 
 - [Hello Ray!  **Part1:** Ray Core Walkthrough](https://ysyisyourbrother.github.io/Hello-Ray-Part1/)
 

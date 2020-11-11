@@ -21,7 +21,7 @@ With the help of ray, we can ignore communication(grpc) and storage(redis) and e
 
 <img src="https://ysyisyourbrother.github.io/images/posts_img/HelloRay/3.jpeg" alt="image-20201101135934182" style="zoom:50%;" />
 
-## Combining RL with the framework
+## Combine RL with the framework
 
 In next serveral sections, I will show complete codes of the demo after combining the simple distributed RL model.
 
@@ -319,13 +319,13 @@ if __name__ == "__main__":
 
 
 
-### References
+## References
 
 1. https://docs.ray.io/en/master/serialization.html
 
 
 
-### Further Reading
+## Further Reading
 
 - [Hello Ray!  **Part1:** Ray Core Walkthrough](https://ysyisyourbrother.github.io/Hello-Ray-Part1/)
 
