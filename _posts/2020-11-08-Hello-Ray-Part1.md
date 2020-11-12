@@ -2,7 +2,7 @@
 layout: post
 title: 'Hello Ray!  Part1: Ray Core Walkthrough'
 tags:
-  - [ray, RL]
+  - [强化学习, ray]
 ---
 
 Hello Ray!

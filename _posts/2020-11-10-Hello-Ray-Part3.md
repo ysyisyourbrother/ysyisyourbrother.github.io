@@ -2,7 +2,7 @@
 layout: post
 title: 'Hello Ray!  Part3: Parallelize your RL model with ray'
 tags:
-  - [ray, RL]
+  - [强化学习, ray]
 ---
 
 In this part, we will use ray to design a simple `distributed reinforcement learning framework`, and put the code in the previous section into it.

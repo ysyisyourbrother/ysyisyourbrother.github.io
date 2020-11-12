@@ -2,7 +2,7 @@
 layout: post
 title: 'Hello Ray!  Part2: Build A Simple RL Demo'
 tags:
-  - [ray, RL]
+  - [强化学习, ray]
 ---
 
 In this part, we will use `python` to build a simple reinforcement learning demo to solve the games in `Open AI Gym` such as `CartPole`, `breakout`  and so on.
