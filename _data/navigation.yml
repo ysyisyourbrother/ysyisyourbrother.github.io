@@ -9,4 +9,5 @@ main:
   - title: "Publications"
     url: /publications/
     
-   
+  - title: "Categories" 
+    url: /Categories/
