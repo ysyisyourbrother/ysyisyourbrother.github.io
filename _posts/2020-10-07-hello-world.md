@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 'Hello World'
-categories: '日常'
+title: 'Hello Blog'
+categories: 'daily'
 tags:
   - daily
 ---

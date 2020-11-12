@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Hello Ray!  Part2: Build A Simple RL Demo'
+categories: '强化学习'
 tags:
   - [强化学习, ray]
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Hello Ray!  Part3: Parallelize your RL model with ray'
+categories: '强化学习'
 tags:
   - [强化学习, ray]
 ---

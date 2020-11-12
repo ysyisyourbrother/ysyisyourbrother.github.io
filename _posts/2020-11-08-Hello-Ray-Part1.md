@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Hello Ray!  Part1: Ray Core Walkthrough'
+categories: '强化学习'
 tags:
   - [强化学习, ray]
 ---
