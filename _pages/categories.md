@@ -1,7 +1,6 @@
 ---
 layout: archive
 title: Categories
-permalink: /categories/
 ---
 
 <section class="catalog">
