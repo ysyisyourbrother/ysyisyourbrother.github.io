@@ -177,7 +177,7 @@ defaults:
     values:
       layout: post
       author_profile: true
-      read_time: true
+      read_time: false        # 阅读时间
       comments: true
       share: true
       related: true
