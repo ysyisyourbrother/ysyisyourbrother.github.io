@@ -219,8 +219,6 @@ print(results)  # prints [2, 3, 4, 5, 6]
 
 
 
-
-
 ## Further Reading
 
 - [Hello Ray!  **Part1:** Ray Core Walkthrough](https://ysyisyourbrother.github.io/Hello-Ray-Part1/)
@@ -228,3 +226,5 @@ print(results)  # prints [2, 3, 4, 5, 6]
 - [Hello Ray!  **Part2:** Build A Simple RL Demo](https://ysyisyourbrother.github.io/Hello-Ray-Part2/)        
 
 - [Hello Ray!  **Part3:** Parallelize your RL model with ray](https://ysyisyourbrother.github.io/Hello-Ray-Part3/)        
+
+- [论文学习｜Ray: A Distributed Framework for Emerging AI Applications](https://ysyisyourbrother.github.io/Ray-Paper/)   
