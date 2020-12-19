@@ -5,6 +5,7 @@ categories: 'Summary'
 tags:
   - [Summary, Ubuntu]
 ---
+Ubuntu主机及云服务器常用的开发配置文档记录
 
 ## **MySQL**安装及配置
 
