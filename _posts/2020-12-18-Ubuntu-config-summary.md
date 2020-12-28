@@ -124,7 +124,7 @@ source ~/.bashrc
 
 Anaconda的python包源都是国外的源，下载速度慢，有些甚至需要梯子才能获取。
 
-```
+```shell
 conda config --show-sources			# 查看源
 ```
 
@@ -140,6 +140,16 @@ channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
   - defaults
 show_channel_urls: true
+
+# pip 换源
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+如果遇到`conda`无法安装的包，可以使用`pip`进行安装，也同样会安装到当前的虚拟环境中。如果遇到网络波动超时的问题导致安装失败，可以进行换源或设置超时时间来解决：
+
+```shell
+pip --default-timeout=1000 install -U tensorflow-gpu								# 设置超时时间
+pip install -U tensorflow-gpu -i https://pypi.tuna.tsinghua.edu.cn/simple			# 使用清华源
 ```
 
 <br>
