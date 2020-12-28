@@ -14,7 +14,7 @@ tags:
 
 下图是RLlib的分层架构：
 
-![image-20201228151140616](assets/RLlib Scalable Reinforcement Learning/image-20201228151140616.png)
+![image-20201228151140616](https://ysyisyourbrother.github.io/images/posts_img/RLlib Scalable Reinforcement Learning/image-20201228151140616.png)
 
 RLlib抽象层将Ray提供的API，比如`Tasks`，`Actors`等封装起来，对上层应用提供支撑。RLlib提供了一些内置的成熟的算法，比如`DQN`等，并封装在RLlib Algorithms中。用户也可以自定义自己的`policy network`和`rollout`策略来替换掉RLlib Abstractions中默认选择的方法。最顶层是应用层，用户可以将算法应用在不同的环境中，比如用来玩OpenAI Gym的游戏，进行服务的调度等。
 
@@ -30,7 +30,7 @@ RLlib中包含几个核心的概念，分别是策略(`Policies`)，采样(`Samp
 
 `Policies`也就是强化学习中的策略网络(`Policies Network`)，它用来确定`agents`和环境交互时采取的`actions`。Rollout workers通过`policy`来确定`agent`的`actions`。RLlib还支持多`agents`和多`policies`的场景：在gym环境中，只有一个`agent`和一个`policy`；在多环境下，多个`agents`和多个`env`交互，并通过共同的`policy`决策，也可以通过多个`policies`来决策。
 
-![image-20201228152951978](assets/RLlib Scalable Reinforcement Learning/image-20201228152951978.png)
+![image-20201228152951978](https://ysyisyourbrother.github.io/images/posts_img/RLlib Scalable Reinforcement Learning/image-20201228152951978.png)
 
 <br>
 
@@ -56,7 +56,7 @@ RLlib从Rollout worker中收集一批批`rollout_fragment_length`大小的数据
 
 Policies都定义了`learn_on_batch()`方法来对policy进行训练。RLlib Trainer类协调正在运行的发布和优化策略的分布式工作流。 他们通过利用Ray并行迭代器 ( `ParallelIterator` )来实现所需的计算模式来实现此目的。 下图显示了同步采样，这是这些模式中最简单的一种：
 
-![image-20201228154626550](assets/RLlib Scalable Reinforcement Learning/image-20201228154626550.png)
+![image-20201228154626550](https://ysyisyourbrother.github.io/images/posts_img/RLlib Scalable Reinforcement Learning/image-20201228154626550.png)
 
 <br>
 
@@ -81,7 +81,7 @@ trainer.stop()
 
 Trainer模块是RLlib的核心组件，它确定了Rollout worker的工作流程，并将他们返回的数据存储在`Buffer`中并进行训练。RLlib中Trainer模块的继承关系如下图所示：
 
-<img src="assets/RLlib Scalable Reinforcement Learning/image-20201229004418169.png" alt="image-20201229004418169" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/RLlib Scalable Reinforcement Learning/image-20201229004418169.png" alt="image-20201229004418169" style="zoom:50%;" />
 
 RLlib中的Trainer继承了Ray-Tune模块的Trainable类。Tune是基于的Ray的超参数调节框架，Trainable类的`train()`方法会去调用其`step()`方法，因此继承Trainable后需要去重写`step()`方法来执行一次训练需要进行的工作。在RLlib定义的Trainer类中，默认的`step()`是去执行一次用户实现的工作流：
 
