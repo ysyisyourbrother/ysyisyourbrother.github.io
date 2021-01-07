@@ -294,10 +294,8 @@ set number
 set ruler
 " 历史纪录
 set history=1000
-" 输入的命令显示出来，看的清楚些
+" 输入的命令显示出来
 set showcmd
-" 状态行显示的内容
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 " 启动显示状态行1，总是显示状态行2
 set laststatus=2
 " 语法高亮显示
@@ -307,11 +305,16 @@ set fileencoding=utf-8
 set termencoding=utf-8
 set fileformat=unix
 set encoding=utf-8
+
 " 配色方案
 set background=dark
-" colorscheme solarized
+" 需要下载solarized.vim   
+" 可以通过 Plug 'altercation/vim-colors-solarized'下载
+" 下载后要放到.vim/colors文件夹下
+colorscheme solarized
 " 指定配色方案是256色
 set t_Co=256
+
 set wildmenu
 " 去掉有关vi一致性模式，避免以前版本的一些bug和局限，解决backspace不能使用的问题
 set nocompatible
@@ -354,20 +357,28 @@ filetype indent on
  
 " C风格缩进
 set cindent
-" 功能设置
- 
+
 " 去掉输入错误提示声音
 set noeb
 " 自动保存
 set autowrite
 " 突出显示当前行 
 set cursorline
-"设置光标样式为竖线vertical bar
+" Set up vertical vs block cursor for insert/normal mode
 " Change cursor shape between insert and normal mode in iTerm2.app
-"if $TERM_PROGRAM =~ "iTerm"
+" if $TERM_PROGRAM =~ "iTerm"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
-"endif
+" endif
+" Change cursor shape in screen mode
+if &term =~ "screen."
+    let &t_ti.="\eP\e[1 q\e\\"
+    let &t_SI.="\eP\e[5 q\e\\"
+    let &t_EI.="\eP\e[1 q\e\\"
+    let &t_te.="\eP\e[0 q\e\\"
+endif
+
+
 " 共享剪贴板
 set clipboard+=unnamed
 " 文件被改动时自动载入"
@@ -468,14 +479,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 
 " 配色方案
-" colorscheme neodark
-Plug 'KeitaNakamura/neodark.vim'
-" colorscheme monokai
-Plug 'crusoexia/vim-monokai'
-" colorscheme github 
-Plug 'acarapetis/vim-colors-github'
-" colorscheme one 
-Plug 'rakr/vim-one'
+" colorscheme solarized
+Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
@@ -512,7 +517,9 @@ let g:jedi#goto_assignments_command = "<leader>g"
 "==============================================================================
 
 " 打开和关闭NERDTree快捷键
-map <F10> :NERDTreeToggle<CR>
+map <F2> :NERDTreeToggle<CR>
+" 聚焦到NERDTree上
+map tt :NERDTreeFocus<CR>
 " 显示行号
 let NERDTreeShowLineNumbers=1
 " 打开文件时是否显示目录
@@ -525,9 +532,11 @@ let NERDTreeShowHidden=0
 let NERDTreeIgnore=['\.pyc','\~$','\.swp']
 " 打开 vim 文件及显示书签列表
 let NERDTreeShowBookmarks=2
-
 " 在终端启动vim时，共享NERDTree
 let g:nerdtree_tabs_open_on_console_startup=1
+" 更改i和s的映射 防止和光标移动功能冲突
+let g:NERDTreeMapOpenSplit=7
+let g:NERDTreeMapVOpenSplit=8
 
 
 "==============================================================================
@@ -588,7 +597,111 @@ service nginx reload			# 重新加载nginx
 service nginx status			# 查看nginx状态
 ```
 
+<br>
 
+## **Docker**安装及配置
+
+### 使用APT安装
+
+由于 `apt` 源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。
+
+```shell
+$ sudo apt-get update
+
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+
+为了确认所下载软件包的合法性，需要添加软件源的 `GPG` 密钥。
+
+```shell
+$ curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+
+
+# 官方源
+# $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+
+然后，我们需要向 `sources.list` 中添加 Docker 软件源:
+
+```shell
+$ sudo add-apt-repository \
+    "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+
+
+# 官方源
+# $ sudo add-apt-repository \
+#    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+#    $(lsb_release -cs) \
+#    stable"
+```
+
+更新 apt 软件包缓存，并安装 `docker-ce`：
+
+```shell
+$ sudo apt-get update
+
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+<br>
+
+### 使用脚本安装
+
+在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装，另外可以通过 `--mirror` 选项使用国内源进行安装：
+
+```shell
+# $ curl -fsSL test.docker.com -o get-docker.sh
+$ curl -fsSL get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh --mirror Aliyun
+# $ sudo sh get-docker.sh --mirror AzureChinaCloud
+```
+
+<br>
+
+### 建立 docker 用户组
+
+````shell
+sudo groupadd docker				# 建立docker组
+sudo usermod -aG docker $USER		# 将当前用户加入 docker 组：
+````
+
+<br>
+
+### 启动docker
+
+```shell
+# 启动docker
+$ sudo systemctl enable docker			
+$ sudo systemctl start docker
+
+$ systemctl restart  docker				# 重启
+
+# 停止docker
+$ sudo service docker stop				
+$ sudo systemctl stop docker
+```
+
+<br>
+
+### 下载Docker-compose
+
+在 Linux 上的也安装十分简单，从 [官方 GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可
+
+```shell
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+# 国内用户可以使用以下方式加快下载
+$ sudo sh -c "curl -L https://download.fastgit.org/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
 
 <br>
 
@@ -652,3 +765,4 @@ systemctl restart sshd.service
 ```
 
 如果出现`Connection fail. Operation timeout`等问题，可以尝试把本地的`~/.ssh/known_hosts`文件删除。
+

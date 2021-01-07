@@ -109,15 +109,21 @@ DQNTrainer = GenericOffPolicyTrainer.with_updates(
 
 可以看见DQNTrainer中自定义的配置只有几个，而核心的功能则在`DEFAULT_CONFIG`、`execution_plan`和`get_policy_class`中。内部还有一些通用的方法，比如**初始化worker_set**等。
 
-#### DEFAULT CONFIG
+<br>
+
+#### **DEFAULT CONFIG**
 
 这里包含了一些模型训练的配置，包括`learning rate`、`rollout_fragment_length`、`train_batch_size`和`num_workers`等一些上面提到了关键参数，都可以从这个入口进行配置。配置是通过`dict`形式构建和传递的。
 
-#### WorkerSet
+<br>
+
+#### **WorkerSet**
 
 在构建`trainer_cls`的时候会根据配置初始化`num_workers`数量的`remote_worker`。通过构建`WorkerSet`类，这个类要求**至少要有一个本地的worker和0至n个remote worker**。其还包含一些关键的方法，比如同步参数`sync_weights`，添加远程worker`add_workers`等。*具体见WorkerSet模块分析*。
 
-#### Execution Plan
+<br>
+
+#### **Execution Plan**
 
 这个函数传入`WorkerSet`作为参数，用来控制Rollout_worker的工作流程，并将收集数据存储到Buffer中并进行SGD训练等工作，可以说是DQNTrainer最核心部分。
 
@@ -144,7 +150,9 @@ DQNTrainer = GenericOffPolicyTrainer.with_updates(
    	e.set_weights.remote(weights, _get_global_vars())
    ```
 
-#### Policy
+<br>
+
+#### **Policy**
 
 DQNTrainer同样自定义了自己的policy network，它提供下面这个函数来让Trainer获取策略。
 
