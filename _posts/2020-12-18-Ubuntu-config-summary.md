@@ -233,6 +233,7 @@ Ubuntu18.04的云服务器一般自带相对较新版本的`vim8.0`，如果想�
 
 ```shell
 vim --version							# 查看vim版本
+sudo apt-get update       # 更新apt
 sudo apt-get remove vim-common			# 卸载当前版本vim
 sudo apt-get install vim				# 安装新版vim
 ```
@@ -246,10 +247,11 @@ sudo apt-get install vim				# 安装新版vim
 ubuntu系统下可使用以下命令快速安装`vim-plug`。
 
 ```shell
-mkdir ~/.vim/autoload/
+mkdir -p ~/.vim/autoload/
 cd ~/.vim/autoload/
 wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
+如果出现raw.githubusercontent无法访问的问题，可以向`sudo vim /etc/hosts` 中添加`199.232.68.133 raw.githubusercontent.com`。
 
 #### 1.1 vim-plug配置介绍
 
@@ -377,6 +379,22 @@ if &term =~ "screen."
     let &t_EI.="\eP\e[1 q\e\\"
     let &t_te.="\eP\e[0 q\e\\"
 endif
+
+" 设置光标样式
+" 进入插入模式下的光标形状
+let &t_SI.="\e[5 q"
+"
+" " 进入替换模式下的光标形状
+let &t_SR.="\e[3 q"
+"
+" " 从插入模式或替换模式下退出，进入普通模式后的光标形状
+let &t_EI.="\e[1 q"
+"
+" " 进入vim时，设置普通模式下的光标形状
+autocmd VimEnter * silent !echo -ne "\e[1 q"
+"
+" " 离开vim后，恢复shell模式下的光标形状
+autocmd VimLeave * silent !echo -ne "\e[5 q"
 
 
 " 共享剪贴板
@@ -726,7 +744,7 @@ sudo systemctl status ssh
 SSH连接如果客户端长时间没有动作，SSH连接就会被服务端自动关闭，我们可以通过设置来保持长时间连接。
 
 ```shell
-vim /etc/ssh/sshd_config
+sudo vim /etc/ssh/sshd_config
 
 # 找这两个配置项，去掉注释并改为
 # 	服务端每隔多少秒向客户端发送一个心跳数据
