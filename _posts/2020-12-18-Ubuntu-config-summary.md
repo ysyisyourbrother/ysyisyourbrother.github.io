@@ -670,6 +670,7 @@ $ sudo sh get-docker.sh --mirror Aliyun
 ````shell
 sudo groupadd docker				# 建立docker组
 sudo usermod -aG docker $USER		# 将当前用户加入 docker 组：
+sudo newgrp docker					# 更新
 ````
 
 <br>
