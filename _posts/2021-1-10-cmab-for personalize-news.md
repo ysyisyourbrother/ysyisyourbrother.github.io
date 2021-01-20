@@ -24,6 +24,15 @@ $$
 R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}]
 $$
 
+$$
+R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}]
+$$
+
+$$
+y=F(x,\{W_i\})+x
+$$
+
+$$ R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}] $$ 
 
 **著名的K-armed bandit**其实是cmab的一个特例：
 
