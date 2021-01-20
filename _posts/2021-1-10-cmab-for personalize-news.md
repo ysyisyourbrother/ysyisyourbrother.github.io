@@ -19,6 +19,7 @@ tags:
 - $a_t^*$是在实验$t$中具有最大期望的payoff的arm
 
 我们的目标是：设计一个算法A以便使total payoff期望最大化。也相当于：我们会发现一个算法，以便对应各最优的arm-selection策略的regret最小化。其中 T-trail regret $R_A(T)$定义为：
+
 $$
 R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}]
 $$
@@ -50,34 +51,44 @@ Exploration可能会增加**short-term regret**，因为会选到一些次优的
 ### 不相交(disjoint)线性模型的LinUCB
 
 如果一个arm a的期望payoff在 d 维特征$x_{t,a}$上是线性的，它具有一些未知系数向量$\theta_a^*$，对于所有t：
+
 $$
 E\left[r_{t, a} \mid X_{t, a}\right]=X_{t, a}^{T} \theta_{a}^{*}
 \label{exception}
 $$
+
 该模型称为disjoint的原因是：**不同arms间的参数不共享(每个arm各有一组权重，与d维特征存在加权关系得到期望payoff)**。假设：
 
 - $D_a$是在实验 t 上的一个$m \times d$ 维的设计矩阵(design matrix)，它的行臂a对应的m个文章。
 - $c_a \in R^m$是相应的响应向量(corresponding response vector)，（例如：相应的m篇文章 点击/未点击 user feedback）
 
 因此我们可以得到优化的目标为：
+
 $$
 loss = \sum_{t=1}^{T} (c_{t,a} - D_{t,a}X_{t,a})^2
 $$
+
 我们将岭回归（ridge regression）应用到训练数据$(D_a,c_a)$上，给定了系数的一个估计（即伪逆）：
+
 $$
 \hat{\theta}_{a}=\left(D_{a}^{T} D_{a}+I_{d}\right)^{-1} D_{a}^{T} c_{a}
 $$
+
 当在 $c_{a}$ 中的元素 (components) 与 $D_{a}$ 中相应行是条件独立时，它至少具有1 - $\delta$ 的概率：
+
 $$
 \label{upper bound}
 \left|x_{t, a}^{T} \hat{\theta}_{a}-E\left[r_{t, a} \mid x_{t, a}\right]\right| \leq \alpha \sqrt{x_{t, a}^{T}\left(D_{a}^{T} D_{a}+I_{d}\right)^{-1} x_{t, a}}
 $$
+
 其中 $\alpha=1+\sqrt{\ln (2 / \delta) / 2}$ 是一个常数。
 
 也就是平均的结果和最优结果的差距不会大于不等式的右侧。换句话说，上述不等式为arm a的期望payoff给出了一个合理的紧凑的UCB，从中生成一个UCB-type arm-selection策略，在每个实验t上，选择：
+
 $$
 a_{t} \equiv \operatorname{argmax}_{a \in A_{t}}\left(x_{t, a}^{T} \hat{\theta}_{a}+\alpha \sqrt{x_{t, a}^{T} A_{a}^{-1} x_{t-a}}\right)
 $$
+
 其中：$A_{a} \equiv D_{a}^{T} D_{a}+I_{d}$
 
 算法如下：
@@ -96,9 +107,11 @@ $$
 ### Hybrid线性模型的LinUCB
 
 在许多应用中（包含新闻推荐），除了arm-specific情况之外，所有arms都会使用共享特征。例如，在新闻文章推荐中，一个用户可能只偏爱于政治文章，因而可以提供这样的一种机制。因此，同时具有共享和非共享components的特征非常有用。我们采用如下的hybrid模型来额外添加其它的线性项到等式$\eqref{exception}$的右侧：
+
 $$
 E\left[r_{t, a} \mid x_{t, a}\right]=z_{t, a}^{T} \beta^{*}+x_{t, a}^{T} \theta_{a}^{*}
 $$
+
 其中：
 
 - $z_{t,a}\in R^k$是当前user/article组合的特征
