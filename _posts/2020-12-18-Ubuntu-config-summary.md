@@ -7,6 +7,8 @@ tags:
 ---
 Ubuntu主机及云服务器常用的开发配置文档记录
 
+[toc]
+
 ## **MySQL**安装及配置
 
 ### Step1: 安装MySQL
@@ -725,6 +727,22 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 <br>
 
 ## **服务端**相关配置
+
+### Ubuntu用户管理
+
+#### 更改用户密码
+
+```shell
+# 默认切换到root账户下
+sudo su
+# user 为要切换的用户名
+sudo passwd user
+# 输入新旧密码，更改成功
+```
+
+
+
+<br>
 
 ### SSH远程连接配置
 

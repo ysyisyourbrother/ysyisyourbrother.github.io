@@ -82,7 +82,7 @@ $$
 
 算法如下：
 
-<img src="assets/A contextual-bandit approach to personalized news article recommendation/image-20210111144953082.png" alt="image-20210111144953082" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111144953082.png" alt="image-20210111144953082" style="zoom:50%;" />
 
 注意，在等式$\eqref{upper bound}$中给定的αα值在一些应用中会比较大，也就是误差可能会更大。因此如果对这些参数最优化有可能会产生更高的total payoffs。不同于所有的UCB方法，LinUCB总是会选择具有最高UCB的arm。
 
@@ -106,7 +106,7 @@ $$
 
 该模型是hybrid的，广义上系数的一些参数$\beta^*$是会被所有arms共享的，而其他参数$\theta_a^*$则不会
 
-<img src="assets/A contextual-bandit approach to personalized news article recommendation/image-20210111171506371.png" alt="image-20210111171506371" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111171506371.png" alt="image-20210111171506371" style="zoom:50%;" />
 
 对于hybrid模型，我们不再使用LinUCB算法作为多个不相互独立的arms的置信区间，因为他们共享特征参数。由于空间限制，我们给出了算法2的伪码（第5行和第12行会计算关于系数的redge-regression的解，第13行会计算置信区间），详细导数见完整paper。这里我们只指出了重要的事实：
 
@@ -121,7 +121,7 @@ $$
 
 Today模块是在Yahoo! Front Page（流量最大）的最显著位置的panel。在Today Module上缺省的”Featured” tab会对高质量文章（主要新闻）的1/4进行高亮（highlight）, 而4篇文章通过一个小时级别更新的由人工编辑的文章池中进行选择。一个用户可以点击在story位置上的highlightd文章，如果她对文章感兴趣会点击进入去读取更多的详情，event被看成是一次story click。
 
-<img src="assets/A contextual-bandit approach to personalized news article recommendation/image-20210111172338068.png" alt="image-20210111172338068" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111172338068.png" alt="image-20210111172338068" style="zoom:50%;" />
 
 <br>
 
