@@ -114,7 +114,7 @@ $$
 - $z_{t,a}\in R^k$是当前user/article组合的特征
 - $\beta^*$是一个未知的系数向量，它对所有的arms都是共享的
 
-该模型是hybrid的，广义上系数的一些参数 $\beta^*$ 是会被所有arms共享的，而其他参数 $\theta_a^*$ 则不会
+该模型是hybrid的，广义上系数的一些参数 $\beta^* $ 是会被所有arms共享的，而其他参数 $\theta_a^* $ 则不会
 
 <img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111171506371.png" alt="image-20210111171506371" style="zoom:50%;" />
 
