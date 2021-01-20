@@ -24,16 +24,6 @@ $$
 R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}]
 $$
 
-$$
-R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}]
-$$
-
-$$
-y=F(x,\{W_i\})+x
-$$
-
-$$ R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}] $$ 
-
 **著名的K-armed bandit**其实是cmab的一个特例：
 
 - arm set $At$保持不变，对于所有t都包含K个arms
@@ -50,8 +40,6 @@ $$ R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}] $$
 **bandit problems的基本挑战是，需要对exploration和exploitation做平衡**。算法会利用（exploits）它的过往经验来选择看起来最好的arm，但看起来最优的arm可能在实际上是次优的，因为在算法A的知识(knowledge)中是不精准的（imprecision）。**为了避免这种不希望的情况，算法A必须通过实际选择看起来次优的arms来进行explore，以便收集关于它们的更多信息**。
 
 Exploration可能会增加**short-term regret**，因为会选到一些次优的arms。然而，获得关于arms的平均payoffs信息。因此需要重新定义算法A的arms payoffs，以减小**long-term regret**为最终目标。通常，即不会存在一个纯粹的exploring，也不会存在一个纯粹的exploiting算法，需要对两者做平衡。
-
-
 
 <br>
 
@@ -104,7 +92,7 @@ $$
 
 <img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111144953082.png" alt="image-20210111144953082" style="zoom:50%;" />
 
-注意，在等式$\eqref{upper bound}$中给定的αα值在一些应用中会比较大，也就是误差可能会更大。因此如果对这些参数最优化有可能会产生更高的total payoffs。不同于所有的UCB方法，LinUCB总是会选择具有最高UCB的arm。
+注意，在等式$\ref{upper bound}$中给定的α值在一些应用中会比较大，也就是误差可能会更大。因此如果对这些参数最优化有可能会产生更高的total payoffs。不同于所有的UCB方法，LinUCB总是会选择具有最高UCB的arm。
 
 该算法也具有一些良好的性质：
 
@@ -115,7 +103,7 @@ $$
 
 ### Hybrid线性模型的LinUCB
 
-在许多应用中（包含新闻推荐），除了arm-specific情况之外，所有arms都会使用共享特征。例如，在新闻文章推荐中，一个用户可能只偏爱于政治文章，因而可以提供这样的一种机制。因此，同时具有共享和非共享components的特征非常有用。我们采用如下的hybrid模型来额外添加其它的线性项到等式$\eqref{exception}$的右侧：
+在许多应用中（包含新闻推荐），除了arm-specific情况之外，所有arms都会使用共享特征。例如，在新闻文章推荐中，一个用户可能只偏爱于政治文章，因而可以提供这样的一种机制。因此，同时具有共享和非共享components的特征非常有用。我们采用如下的hybrid模型来额外添加其它的线性项到等式$\ref{exception}$的右侧：
 
 $$
 E\left[r_{t, a} \mid x_{t, a}\right]=z_{t, a}^{T} \beta^{*}+x_{t, a}^{T} \theta_{a}^{*}
