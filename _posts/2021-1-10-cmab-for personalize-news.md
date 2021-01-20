@@ -114,7 +114,7 @@ $$
 - $z_{t,a}\in R^k$是当前user/article组合的特征
 - $\beta^*$是一个未知的系数向量，它对所有的arms都是共享的
 
-该模型是hybrid的，广义上系数的一些参数$\beta^*$是会被所有arms共享的，而其他参数$\theta_a^*$则不会
+该模型是hybrid的，广义上系数的一些参数 $\beta^*$ 是会被所有arms共享的，而其他参数 $\theta_a^*$ 则不会
 
 <img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111171506371.png" alt="image-20210111171506371" style="zoom:50%;" />
 
@@ -165,8 +165,8 @@ Today模块是在Yahoo! Front Page（流量最大）的最显著位置的panel�
 为了进一步减小维度，以及捕获在这些原始特征中的非线性关系，我们会基于在2008年九月收集的随机曝光数据来执行关联分布。根据之前的降维方法[13]，我们将用户特征投影到文章类目上，接着使用相似偏好将用户聚类成分组(groups)。如下：
 
 - 我们首先通过原始的user/article features，来使用LR来拟合一个关于点击率 (click probability) 的bilinear model, 以便 $\phi_{u}^{T} W \phi_{a}$ 来近似用户u点击文章a的概率，其中 $\phi_{u}$ 和 $\phi_{a}$ 是相应的feature vectors, W是由LR最优化得到的权重矩阵。
-- 通过计算 $\psi_{u}=\phi_{u}^{T} W,$ 原始的user features接着被投影到一个induced space上。这 里，用于user u, 在 $\psi_{u}$ 的第i个元素可以被解释成：用户喜欢文章的第i个类别的度 (degree) 。 在induced的 $\psi_{u}$ space中使用K-means算法将用户聚类成5个clusters。
-- 最终的user feature是一个6向量 (six-vector) ： 5个条目对应于在这5个clusters中的 成员（使用一个Gaussian kernel计算，接着归一化以便他们总和一致），第6个是一 个常数特征1.
+- 通过计算 $\psi_{u}=\phi_{u}^{T} W,$ 原始的user features接着被投影到一个induced space上。这里，用于user u, 在 $\psi_{u}$ 的第i个元素可以被解释成：用户喜欢文章的第i个类别的度 (degree) 。 在induced的 $\psi_{u}$ space中使用K-means算法将用户聚类成5个clusters。
+- 最终的user feature是一个6向量 (six-vector) ： 5个条目对应于在这5个clusters中的 成员（使用一个Gaussian kernel计算，接着归一化以便他们总和一致），第6个是一个常数特征1.
 
 在实验t中，每篇文章a具有一个独立的6维特征 $x_{t, a}$ (包含一个常数特征1) 。与一个user feature的外积 (outer product) 给出了6x6=36个特征，表示为 $z_{t, a} \in R^{36},$ 对应于等式(6) 的共享特征，这样 $\left(z_{t, a}, x_{t, a}\right)$ 可以被用于在hybrid线性模型中。注意，特征 $z_{t, a}$ 包含了userarticle交互信息, 而 $x_{t, a}$ 只包含了用户信息。
 
