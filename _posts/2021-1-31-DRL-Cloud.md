@@ -48,9 +48,13 @@ tags:
 
    $ _n^u\phi $$ _n^u\phi $
 
-2. **Task Characteristics**：对每个 task ${}_n^u\phi$ ，请求VM的类型标记为 ${ }_n^uK$ ，它的估计执行时间为 ${_n^uL}$ ，通过 **Nephele** 近似方法可以推理。用户规定的 task 截止时间 ${_n^uT_{ddl}}$ ，CSP 调度任务开始时间 ${_n^uT_{start}}$ 。如果任务不能使用有限的资源在给定的 ${_n^uT_{ddl}}$ 时间完成，该 task 就会被立即拒绝：$_n^uT_{start} + _n^uL<_n^uT_{ddl}$。
+2. **Task Characteristics**：对每个 task ${ }_{n}^{u} \phi$ ，请求VM的类型标记为 ${ }_{n}^{u} K$ ，它的估计执行时间为 ${_n^uL}$ ，通过 **Nephele** 近似方法可以推理。用户规定的 task 截止时间 ${_n^uT_{ddl}}$ ，CSP 调度任务开始时间 ${_n^uT_{start}}$ 。如果任务不能使用有限的资源在给定的 ${_n^uT_{ddl}}$ 时间完成，该 task 就会被立即拒绝：$_n^uT_{start} + _n^uL<_n^uT_{ddl}$。
 
    CSP支持V种不同的VM类型，包括 $\{VM_1,VM_2,...\}$ ，每一个$VM_v$都和一个二元组关联 $\{R^v_{CPU},R^v_{MEM}\}$，代表每个 VM 可用的CPU和内存量。同样，每一个 task 也和一个二元组关联 $\{D^v_{CPU},D^v_{MEM}\}$ ，代表所需的CPU和内存量。如果一个 task $_n^u\phi$ 被分配给一个$VM_v$，需要满足前提条件：$R_{CPU}^v\ge {_n^uD}_{CPU}$和$R_{MEM}^v\ge {_n^uD}_{MEM}$
+
+$$
+{ }_{n}^{u} T_{\text {start }}+{ }_{n}^{u} L \leq{ }_{n}^{u} T_{d d l}
+$$
 
 <br>
 
