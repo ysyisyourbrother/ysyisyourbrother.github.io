@@ -44,11 +44,11 @@ tags:
 
 用户工作负荷模型由多个 jobs ( user requests ) 组成，每一个都包含多个 tasks ( with dependencies )。
 
-1. **Job Characteristics**：用户的 jobs 由多个不相交的 **DAG ( Directed  Acyclic Graphs )** 组成。一个 DAG $G_u(N_u,W_u)$包含$N_u$个顶点和$W_u$条边。每一个顶点代表一个 task ，每一条边代表当一个 父task $_i^u\phi$ 完成后数据传送到另外一个 子task $_j^u\phi$。
+1. **Job Characteristics**：用户的 jobs 由多个不相交的 **DAG ( Directed  Acyclic Graphs )** 组成。一个 DAG $G_u(N_u,W_u)$包含$N_u$个顶点和$W_u$条边。每一个顶点代表一个 task ，每一条边代表当一个 父task $\sideset{^u_i}{}\phi$ 完成后数据传送到另外一个 子task $\sideset{^u_j}{}\phi$。
 
-2. **Task Characteristics**：对每个 task $\sideset{^u_n}{}\phi$ ，请求VM的类型标记为 $\sideset{^{u}_{n}}{} K$ ，它的估计执行时间为 ${_n^uL}$ ，通过 **Nephele** 近似方法可以推理。用户规定的 task 截止时间 ${_n^uT_{ddl}}$ ，CSP 调度任务开始时间 ${_n^uT_{start}}$ 。如果任务不能使用有限的资源在给定的 ${_n^uT_{ddl}}$ 时间完成，该 task 就会被立即拒绝：$_n^uT_{start} + _n^uL<_n^uT_{ddl}$。
+2. **Task Characteristics**：对每个 task $\sideset{^u_n}{}\phi$ ，请求VM的类型标记为 $\sideset{^u_n}{} K$ ，它的估计执行时间为 $\sideset{^u_n}{}L$ ，通过 **Nephele** 近似方法可以推理。用户规定的 task 截止时间 $\sideset{^u_n}{}T_{ddl}$ ，CSP 调度任务开始时间 $\sideset{^u_n}{}T_{start}$ 。如果任务不能使用有限的资源在给定的 $\sideset{^u_n}{}T_{ddl}$ 时间完成，该 task 就会被立即拒绝：$\sideset{^u_n}{}T_{start} +\sideset{^u_n}{}L<\sideset{^u_n}{}T_{ddl}$。
 
-   CSP支持V种不同的VM类型，包括 $\{VM_1,VM_2,...\}$ ，每一个$VM_v$都和一个二元组关联 $\{R^v_{CPU},R^v_{MEM}\}$，代表每个 VM 可用的CPU和内存量。同样，每一个 task 也和一个二元组关联 $\{D^v_{CPU},D^v_{MEM}\}$ ，代表所需的CPU和内存量。如果一个 task $_n^u\phi$ 被分配给一个$VM_v$，需要满足前提条件：$R_{CPU}^v\ge {_n^uD}_{CPU}$和$R_{MEM}^v\ge {_n^uD}_{MEM}$
+   CSP支持V种不同的VM类型，包括 $\{VM_1,VM_2,...\}$ ，每一个$VM_v$都和一个二元组关联 $\{R^v_{CPU},R^v_{MEM}\}$，代表每个 VM 可用的CPU和内存量。同样，每一个 task 也和一个二元组关联 $\{D^v_{CPU},D^v_{MEM}\}$ ，代表所需的CPU和内存量。如果一个 task $\sideset{^u_n}{}\phi$ 被分配给一个$VM_v$，需要满足前提条件：$R_{CPU}^v \ge \sideset{^u_n}{}D_{CPU}$和$R_{MEM}^v \ge \sideset{^u_n}{}D_{MEM}$
 
 <br>
 
@@ -108,13 +108,13 @@ $$
 
 **第一阶段**会判断所需资源是否足够，RP-TS处理器会为task分配一个服务器集群$F_f$，并确定task开始运行的时间。
 
-**第二阶段**会选择一个服务器$\psi_m$来运行 task $_n^u\phi$。当这个task运行完成后，$Stage_2$会发送信号告知它的父task，并将数据传送到 job 队列中。
+**第二阶段**会选择一个服务器$\psi_m$来运行 task $\sideset{^u_n}{}\phi$。当这个task运行完成后，$Stage_2$会发送信号告知它的父task，并将数据传送到 job 队列中。
 
 Q-learning-based 的两阶段 RP-TS处理器如下描述：
 
 - **Action Space**：
 
-  - 在$Stage_1$，DQN负责从$F$个服务器集群中选择一个服务器集群$F_f$，并确定一个开始的时间$_n^uT_{start}$。因此$Stage_1$的DQN的 action space 可以表示为：$A_{Stage_1}=\{F_1^{T_1},...,F_F^{T_T}\}$
+  - 在$Stage_1$，DQN负责从$F$个服务器集群中选择一个服务器集群$F_f$，并确定一个开始的时间$\sideset{^u_n}{}T_{start}$。因此$Stage_1$的DQN的 action space 可以表示为：$A_{Stage_1}=\{F_1^{T_1},...,F_F^{T_T}\}$
 
   - 在$Stage_2$，DQN负责从服务器集群中选择一个服务器，因此 action space 为$A_{Stage_2}=\{\psi_1,...,\psi_{M_f}\}$
 
