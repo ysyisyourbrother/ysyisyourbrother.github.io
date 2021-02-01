@@ -63,16 +63,20 @@ tags:
 ### C. Energy Consumption Model
 
 服务器$\psi_m$的**CPU利用率**$U{r^m}(t)$计算为：
+
 $$
 U r^{m}(t)=\frac{\sum_{v=1}^{V} \lambda_{v}^{m}(t) \cdot R_{C P U}^{v}}{C_{C P U}^{m}}
 $$
+
 总的能量开销由静态电能$Pwr_{st}^m$和动态电能$Pwr_{dy}^m(t)$两部分组合。静态电能一般为常数，动态电能当CPU利用率达到最优之前是线性增长的，之后则不是，计算方式如下：
+
 $$
 \left\{\begin{array}{ll}
 U r^{m}(t) \cdot \alpha_{m}, & U r^{m}(t)<U r_{O p t}^{m} \\
 U r_{O p t}^{m} \cdot \alpha_{m}+\left(U r^{m}(t)-U r_{O p t}^{m}\right)^{2} \cdot \beta_{m}, & U r^{m}(t) \geq U r_{O p t}^{m}
 \end{array}\right.
 $$
+
 <br>
 
 ### D. Realistic Price Model
@@ -80,16 +84,20 @@ $$
 本文考虑了一种现实的计价模型 $Price(t, Pwr_{ttl}(t))$，它由 **time-of-use-pricing ( TOUP )** 和 **real-time pricing( RTP )**组成。TOUP基于每天的时段，在高峰时段费用较高，这样可以鼓励用户在非高峰时段使用。
 
 RTP计价则如下计算：
+
 $$
 R T P\left(P w r_{t t l}(t)\right)=\left\{\begin{array}{ll}
 R T P^{l}(t), & P w r_{t t l}(t)<\theta(t) \\
 R T P^{h}(t), & P w r_{t t l}(t) \geq \theta(t)
 \end{array}\right.
 $$
+
 其中$\theta(t)$是一个阈值，总的电能开销计算为：
+
 $$
 \text { TotalCost }=\sum_{t=1}^{T} \operatorname{Price}\left(t, P w r_{t t l}(t)\right)
 $$
+
 <br>
 
 ## DRL-Cloud设计与实现
@@ -131,10 +139,13 @@ Q-learning-based 的两阶段 RP-TS处理器如下描述：
   RP-TS处理器的目标是通过一序列的actions，最小化长期的总能量消耗。在状态$s_t$输入 $a_t$后，系统会进入$s_{t+1}$状态，并从环境中获得一个 reward $r_t$( 它是采取了$a_t$后能量消耗的**增量**，也就是当前总能量消耗减去上一步的总能量消耗 )。
 
   对于$Stage_1$，reward function可以表达为：
+
   $$
   r_{\text {Stage}_{1}}=\operatorname{Price}\left({ }_{n}^{u} T_{\text {start }}, P w r_{t t l}^{F_{f}}\left({ }_{n}^{u} T_{\text {start }}\right)-P w r_{t t l}^{F_{f}}\left(T_{\text {start }}^{p r e}\right)\right)
   $$
+
   类似的，在$Stage_2$，reward function 可以表达为：
+  
   $$
   r_{\text {Stage}_{2}}=\operatorname{Price}\left({ }_{n}^{u} T_{\text {start }}, P w r_{t t l}^{\psi_{m_{f}}}\left({ }_{n}^{u} T_{\text {start }}\right)-P w r_{t t l}^{\psi_{m} f}\left(T_{\text {start }}^{\text {pre }}\right)\right)
   $$
