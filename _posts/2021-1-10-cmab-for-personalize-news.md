@@ -19,10 +19,10 @@ tags:
 - $a_t^*$是在实验$t$中具有最大期望的payoff的arm
 
 我们的目标是：设计一个算法A以便使total payoff期望最大化。也相当于：我们会发现一个算法，以便对应各最优的arm-selection策略的regret最小化。其中 T-trail regret $R_A(T)$定义为：
+
 $$
 R_A(T)=E[\sum_{t=1}^Tr_{a,a_t^*}]-E[\sum_{t=1}^Tr_{a,a_t}]
 $$
-
 
 **著名的K-armed bandit**其实是cmab的一个特例：
 
@@ -41,8 +41,6 @@ $$
 
 Exploration可能会增加**short-term regret**，因为会选到一些次优的arms。然而，获得关于arms的平均payoffs信息。因此需要重新定义算法A的arms payoffs，以减小**long-term regret**为最终目标。通常，即不会存在一个纯粹的exploring，也不会存在一个纯粹的exploiting算法，需要对两者做平衡。
 
-
-
 <br>
 
 ## 算法
@@ -50,41 +48,51 @@ Exploration可能会增加**short-term regret**，因为会选到一些次优的
 ### 不相交(disjoint)线性模型的LinUCB
 
 如果一个arm a的期望payoff在 d 维特征$x_{t,a}$上是线性的，它具有一些未知系数向量$\theta_a^*$，对于所有t：
+
 $$
 E\left[r_{t, a} \mid X_{t, a}\right]=X_{t, a}^{T} \theta_{a}^{*}
 \label{exception}
 $$
+
 该模型称为disjoint的原因是：**不同arms间的参数不共享(每个arm各有一组权重，与d维特征存在加权关系得到期望payoff)**。假设：
 
 - $D_a$是在实验 t 上的一个$m \times d$ 维的设计矩阵(design matrix)，它的行臂a对应的m个文章。
 - $c_a \in R^m$是相应的响应向量(corresponding response vector)，（例如：相应的m篇文章 点击/未点击 user feedback）
 
 因此我们可以得到优化的目标为：
+
 $$
 loss = \sum_{t=1}^{T} (c_{t,a} - D_{t,a}X_{t,a})^2
 $$
+
 我们将岭回归（ridge regression）应用到训练数据$(D_a,c_a)$上，给定了系数的一个估计（即伪逆）：
+
 $$
 \hat{\theta}_{a}=\left(D_{a}^{T} D_{a}+I_{d}\right)^{-1} D_{a}^{T} c_{a}
 $$
+
 当在 $c_{a}$ 中的元素 (components) 与 $D_{a}$ 中相应行是条件独立时，它至少具有1 - $\delta$ 的概率：
+
 $$
 \label{upper bound}
 \left|x_{t, a}^{T} \hat{\theta}_{a}-E\left[r_{t, a} \mid x_{t, a}\right]\right| \leq \alpha \sqrt{x_{t, a}^{T}\left(D_{a}^{T} D_{a}+I_{d}\right)^{-1} x_{t, a}}
 $$
+
 其中 $\alpha=1+\sqrt{\ln (2 / \delta) / 2}$ 是一个常数。
 
 也就是平均的结果和最优结果的差距不会大于不等式的右侧。换句话说，上述不等式为arm a的期望payoff给出了一个合理的紧凑的UCB，从中生成一个UCB-type arm-selection策略，在每个实验t上，选择：
+
 $$
 a_{t} \equiv \operatorname{argmax}_{a \in A_{t}}\left(x_{t, a}^{T} \hat{\theta}_{a}+\alpha \sqrt{x_{t, a}^{T} A_{a}^{-1} x_{t-a}}\right)
 $$
+
 其中：$A_{a} \equiv D_{a}^{T} D_{a}+I_{d}$
 
 算法如下：
 
-<img src="assets/A contextual-bandit approach to personalized news article recommendation/image-20210111144953082.png" alt="image-20210111144953082" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111144953082.png" alt="image-20210111144953082" style="zoom:50%;" />
 
-注意，在等式$\eqref{upper bound}$中给定的αα值在一些应用中会比较大，也就是误差可能会更大。因此如果对这些参数最优化有可能会产生更高的total payoffs。不同于所有的UCB方法，LinUCB总是会选择具有最高UCB的arm。
+注意，在等式$\ref{upper bound}$中给定的α值在一些应用中会比较大，也就是误差可能会更大。因此如果对这些参数最优化有可能会产生更高的total payoffs。不同于所有的UCB方法，LinUCB总是会选择具有最高UCB的arm。
 
 该算法也具有一些良好的性质：
 
@@ -95,18 +103,20 @@ $$
 
 ### Hybrid线性模型的LinUCB
 
-在许多应用中（包含新闻推荐），除了arm-specific情况之外，所有arms都会使用共享特征。例如，在新闻文章推荐中，一个用户可能只偏爱于政治文章，因而可以提供这样的一种机制。因此，同时具有共享和非共享components的特征非常有用。我们采用如下的hybrid模型来额外添加其它的线性项到等式$\eqref{exception}$的右侧：
+在许多应用中（包含新闻推荐），除了arm-specific情况之外，所有arms都会使用共享特征。例如，在新闻文章推荐中，一个用户可能只偏爱于政治文章，因而可以提供这样的一种机制。因此，同时具有共享和非共享components的特征非常有用。我们采用如下的hybrid模型来额外添加其它的线性项到等式$\ref{exception}$的右侧：
+
 $$
 E\left[r_{t, a} \mid x_{t, a}\right]=z_{t, a}^{T} \beta^{*}+x_{t, a}^{T} \theta_{a}^{*}
 $$
+
 其中：
 
 - $z_{t,a}\in R^k$是当前user/article组合的特征
 - $\beta^*$是一个未知的系数向量，它对所有的arms都是共享的
 
-该模型是hybrid的，广义上系数的一些参数$\beta^*$是会被所有arms共享的，而其他参数$\theta_a^*$则不会
+该模型是hybrid的，广义上系数的一些参数 $\beta^* $ 是会被所有arms共享的，而其他参数 $\theta_a^* $ 则不会
 
-<img src="assets/A contextual-bandit approach to personalized news article recommendation/image-20210111171506371.png" alt="image-20210111171506371" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111171506371.png" alt="image-20210111171506371" style="zoom:50%;" />
 
 对于hybrid模型，我们不再使用LinUCB算法作为多个不相互独立的arms的置信区间，因为他们共享特征参数。由于空间限制，我们给出了算法2的伪码（第5行和第12行会计算关于系数的redge-regression的解，第13行会计算置信区间），详细导数见完整paper。这里我们只指出了重要的事实：
 
@@ -121,7 +131,7 @@ $$
 
 Today模块是在Yahoo! Front Page（流量最大）的最显著位置的panel。在Today Module上缺省的”Featured” tab会对高质量文章（主要新闻）的1/4进行高亮（highlight）, 而4篇文章通过一个小时级别更新的由人工编辑的文章池中进行选择。一个用户可以点击在story位置上的highlightd文章，如果她对文章感兴趣会点击进入去读取更多的详情，event被看成是一次story click。
 
-<img src="assets/A contextual-bandit approach to personalized news article recommendation/image-20210111172338068.png" alt="image-20210111172338068" style="zoom:50%;" />
+<img src="https://ysyisyourbrother.github.io/images/posts_img/A contextual-bandit approach to personalized news article recommendation/image-20210111172338068.png" alt="image-20210111172338068" style="zoom:50%;" />
 
 <br>
 
@@ -155,8 +165,8 @@ Today模块是在Yahoo! Front Page（流量最大）的最显著位置的panel�
 为了进一步减小维度，以及捕获在这些原始特征中的非线性关系，我们会基于在2008年九月收集的随机曝光数据来执行关联分布。根据之前的降维方法[13]，我们将用户特征投影到文章类目上，接着使用相似偏好将用户聚类成分组(groups)。如下：
 
 - 我们首先通过原始的user/article features，来使用LR来拟合一个关于点击率 (click probability) 的bilinear model, 以便 $\phi_{u}^{T} W \phi_{a}$ 来近似用户u点击文章a的概率，其中 $\phi_{u}$ 和 $\phi_{a}$ 是相应的feature vectors, W是由LR最优化得到的权重矩阵。
-- 通过计算 $\psi_{u}=\phi_{u}^{T} W,$ 原始的user features接着被投影到一个induced space上。这 里，用于user u, 在 $\psi_{u}$ 的第i个元素可以被解释成：用户喜欢文章的第i个类别的度 (degree) 。 在induced的 $\psi_{u}$ space中使用K-means算法将用户聚类成5个clusters。
-- 最终的user feature是一个6向量 (six-vector) ： 5个条目对应于在这5个clusters中的 成员（使用一个Gaussian kernel计算，接着归一化以便他们总和一致），第6个是一 个常数特征1.
+- 通过计算 $\psi_{u}=\phi_{u}^{T} W,$ 原始的user features接着被投影到一个induced space上。这里，用于user u, 在 $\psi_{u}$ 的第i个元素可以被解释成：用户喜欢文章的第i个类别的度 (degree) 。 在induced的 $\psi_{u}$ space中使用K-means算法将用户聚类成5个clusters。
+- 最终的user feature是一个6向量 (six-vector) ： 5个条目对应于在这5个clusters中的 成员（使用一个Gaussian kernel计算，接着归一化以便他们总和一致），第6个是一个常数特征1.
 
 在实验t中，每篇文章a具有一个独立的6维特征 $x_{t, a}$ (包含一个常数特征1) 。与一个user feature的外积 (outer product) 给出了6x6=36个特征，表示为 $z_{t, a} \in R^{36},$ 对应于等式(6) 的共享特征，这样 $\left(z_{t, a}, x_{t, a}\right)$ 可以被用于在hybrid线性模型中。注意，特征 $z_{t, a}$ 包含了userarticle交互信息, 而 $x_{t, a}$ 只包含了用户信息。
 
