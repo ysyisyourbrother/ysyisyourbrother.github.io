@@ -7,6 +7,8 @@ tags:
 ---
 Ubuntu主机及云服务器常用的开发配置文档记录
 
+[toc]
+
 ## **MySQL**安装及配置
 
 ### Step1: 安装MySQL

@@ -38,17 +38,23 @@
   </script>
   {% endif %}
 
+  <!-- 加载font Awesome文本图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
   <!-- Load jQuery -->
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-    type="text/javascript"></script>
+
+  <!-- Load Latex math config-->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
         inlineMath: [['$','$']]
-      }
+      },
+      TeX: { equationNumbers: { autoNumber: "all" } }
     });
   </script>
 
