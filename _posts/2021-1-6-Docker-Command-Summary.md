@@ -307,8 +307,22 @@ $ docker container prune	# 清理所有终止状态容器
 `Compose` 恰好满足了这样的需求。它允许用户通过一个单独的 `docker-compose.yml` 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
 
 - 服务 (`service`)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。
-
 - 项目 (`project`)：由一组关联的应用容器组成的一个完整业务单元，在 `docker-compose.yml` 文件中定义。
+
+<br>
+
+### 安装Docker-Compose
+
+在 Linux 上的也安装十分简单，从 [官方 GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可:
+
+```shell
+$ sudo bash -c "curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+
+# 国内用户可以使用以下方式加快下载
+$ sudo bash -c "curl -L https://download.fastgit.org/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
 
 <br>
 
