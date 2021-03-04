@@ -3,7 +3,7 @@ layout: post
 title: 'Google Wire: Compile-time Dependency Injection for Go'
 categories: '系统设计'
 tags:
-  - [系统设计, 依赖注入, 开发规范]
+  - [系统设计, 依赖注入, 设计模式]
 ---
 
 [Wire](https://github.com/google/wire) 是一个轻巧的Golang依赖注入工具。它由Go Cloud团队开发，通过自动生成代码的方式在编译期完成依赖注入。[依赖注入](https://en.wikipedia.org/wiki/Dependency_injection)是保持软件 “低耦合、易维护” 的重要设计准则之一。
